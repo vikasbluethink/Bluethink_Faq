@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">bluethink_faqgroup_edit.bluethink_faq_faqgroupedit_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Faq Group</item>
+        <item name="reverseMetadataMerge" xsi:type="boolean">true</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">bluethink_faqgroup_edit</item>
+        </item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="Bluethink\Faq\Block\Adminhtml\FaqGroup\Edit\UpdateButton"/>
+            <button name="back" class="Bluethink\Faq\Block\Adminhtml\FaqGroup\Edit\BackButton"/>
+        </buttons>
+        <deps>
+            <dep>bluethink_faqgroup_edit.bluethink_faq_faqgroupedit_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="bluethink_faq_faqgroupedit_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="name" xsi:type="string">bluethink_faq_faqgroupedit_data_source</argument>
+            <argument name="class" xsi:type="string">Bluethink\Faq\Model\FaqGroup\DataProvider</argument>
+            <argument name="primaryFieldName" xsi:type="string">faqgroup_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="*/*/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+	<fieldset name="General">
+		<argument name="data" xsi:type="array">
+			<item name="config" xsi:type="array">
+				<item name="label" xsi:type="string"/>
+			</item>
+		</argument>
+		<field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="source" xsi:type="string">category</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="label" xsi:type="string" translate="true">Enable</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="string">1</item>
+                        <item name="false" xsi:type="string">0</item>
+                    </item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                    <item name="default" xsi:type="string">1</item>
+                </item>
+            </argument>
+        </field>
+		<field name="groupname">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="dataType" xsi:type="string">text</item>
+					<item name="label" translate="true" xsi:type="string">Group Name</item>
+					<item name="formElement" xsi:type="string">input</item>
+					<item name="source" xsi:type="string">FaqGroup</item>
+					<item name="sortOrder" xsi:type="number">20</item>
+					<item name="dataScope" xsi:type="string">groupname</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+			</argument>
+		</field>
+
+		<field formElement="imageUploader" name="icon" sortOrder="40" >
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Bluethink</item>
+				</item>
+			</argument>
+			<settings>
+				<elementTmpl>ui/form/element/uploader/image</elementTmpl>
+				<dataType>string</dataType>
+				<label translate="true">Image</label>
+				<visible>true</visible>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">true</rule>
+				</validation>
+			</settings>
+			<formElements>
+				<imageUploader>
+					<settings>
+						<required>true</required>
+						<uploaderConfig>
+							<param xsi:type="url" name="url" path="bluethink/faqgroup/tempUpload"/>
+						</uploaderConfig>
+						<previewTmpl>Bluethink_Faq/image-preview</previewTmpl>
+						<openDialogTitle>Media Gallery</openDialogTitle>
+						<allowedExtensions>jpg jpeg gif png</allowedExtensions>
+						<maxFileSize>4194304</maxFileSize>
+					</settings>
+				</imageUploader>
+			</formElements>
+		</field>
+
+        <field name="sortorder">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="dataType" xsi:type="string">text</item>
+					<item name="label" translate="true" xsi:type="string">Sort Order</item>
+					<item name="formElement" xsi:type="string">input</item>
+					<item name="source" xsi:type="string">FaqGroup</item>
+					<item name="sortOrder" xsi:type="number">40</item>
+					<item name="dataScope" xsi:type="string">sortorder</item>
+					<item name="validation" xsi:type="array">
+                        <item name="validate-number" xsi:type="boolean">true</item>
+                    </item>
+				</item>
+			</argument>
+		</field>
+		<field name="storeview">
+		    <argument name="data" xsi:type="array">
+		        <item name="options" xsi:type="object">Magento\Store\Model\ResourceModel\Store\Collection</item>
+		        <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">50</item>
+		            <item name="dataType" xsi:type="string">text</item>
+		            <item name="label" xsi:type="string" translate="true">Store View</item>
+		            <item name="formElement" xsi:type="string">multiselect</item>
+		            <item name="source" xsi:type="string">popup</item>
+		            <item name="dataScope" xsi:type="string">storeview</item>
+		            <item name="default" xsi:type="string">0,1,2,3,4</item>
+		            <item name="validation" xsi:type="array">
+		                <item name="required-entry" xsi:type="boolean">true</item>
+		            </item>
+		        </item>
+		    </argument>
+		</field>
+        <field name="customer_group">
+			<argument name="data" xsi:type="array">
+				<item name="options" xsi:type="object">Magento\Customer\Model\ResourceModel\Group\Collection</item>
+				<item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">60</item>
+					<item name="dataType" xsi:type="string">text</item>
+					<item name="label" translate="true" xsi:type="string">Customer Group</item>
+					<item name="formElement" xsi:type="string">multiselect</item>
+					<item name="source" xsi:type="string">popup</item>
+					<item name="dataScope" xsi:type="string">customer_group</item>
+					<item name="default" xsi:type="string">0,1,2,3,4</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+			</argument>
+		</field>
+	</fieldset>
+</form>

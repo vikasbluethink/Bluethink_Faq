@@ -1,0 +1,64 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+
+    <preference for="Bluethink\Faq\Api\FaqInterface" type="Bluethink\Faq\Model\Api\Faq"/>
+
+	<preference for="Magento\Customer\Controller\Account\Login" type="Bluethink\Faq\Controller\Account\Login" />
+  
+<!-- dataSource for faq -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="bluethink_faq_faqlisting_data_source" xsi:type="string">Bluethink\Faq\Model\ResourceModel\Faq\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Bluethink\Faq\Model\ResourceModel\Faq\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">bluethink_faq</argument>
+            <argument name="resourceModel" xsi:type="string">Bluethink\Faq\Model\ResourceModel\Faq</argument>
+        </arguments>
+    </virtualType>
+
+<!-- datasource for faq Group -->
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="bluethink_faq_faqgrouplisting_data_source" xsi:type="string">Bluethink\Faq\Model\ResourceModel\FaqGroup\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Bluethink\Faq\Model\ResourceModel\FaqGroup\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">bluethink_faqgroup</argument>
+            <argument name="resourceModel" xsi:type="string">Bluethink\Faq\Model\ResourceModel\FaqGroup</argument>
+        </arguments>
+    </virtualType>
+
+
+    <virtualType name="Bluethink\Imageupload\ReferenceImageUpload" type="Bluethink\Faq\Model\ImageUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">bluethink/tmp/feature</argument>
+            <argument name="basePath" xsi:type="string">bluethink/feature</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="jpg" xsi:type="string">jpg</item>
+                <item name="jpeg" xsi:type="string">jpeg</item>
+                <item name="gif" xsi:type="string">gif</item>
+                <item name="png" xsi:type="string">png</item>
+            </argument>
+            <argument name="allowedMimeTypes" xsi:type="array">
+                <item name="jpg" xsi:type="string">image/jpg</item>
+                <item name="jpeg" xsi:type="string">image/jpeg</item>
+                <item name="gif" xsi:type="string">image/gif</item>
+                <item name="png" xsi:type="string">image/png</item>
+            </argument> 
+        </arguments>
+    </virtualType>
+    
+    <type name="Bluethink\Faq\Controller\Adminhtml\Faqgroup\TempUpload">
+        <arguments>
+            <argument name="imageUploader" xsi:type="object">Bluethink\Imageupload\ReferenceImageUpload</argument>
+        </arguments>
+    </type>
+
+  
+</config>

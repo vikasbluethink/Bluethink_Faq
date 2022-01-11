@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../app/code/Magento/Webapi/etc/webapi.xsd">
+    <route method="POST" url="/V1/Faq/Faq-api/">
+        <service class="Bluethink\Faq\Api\FaqInterface" method="getPost"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="GET" url="/V1/Faq/getdata/">
+        <service class="Bluethink\Faq\Api\FaqInterface" method="getData"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="GET" url="/V1/Faq/getbyid/:id">
+        <service class="Bluethink\Faq\Api\FaqInterface" method="getById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="POST" url="/V1/Faq/edit/">
+        <service class="Bluethink\Faq\Api\FaqInterface" method="getEdit"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="GET" url="/V1/Faq/delete/:id">
+        <service class="Bluethink\Faq\Api\FaqInterface" method="getDelete"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    
+</routes>

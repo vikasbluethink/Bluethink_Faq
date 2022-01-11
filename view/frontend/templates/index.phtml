@@ -1,0 +1,115 @@
+<?php
+
+
+$groups = $block->getGroupName();
+
+
+
+
+
+?>
+
+<style>
+    *{
+        box-sizing:border-box;margin:0;padding:0;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300&display=swap');
+    .groups{display:flex;flex-wrap:wrap;width:100%;justify-content:space-between;}
+    
+    .groups a{padding:10px;text-decoration:none;}
+
+    .group{display:flex;align-items:center; justify-content:center;width:auto; height: 55px; border:2px solid #198dd3;color:#198dd3;font-weight:bold;border-radius: 5px;text-transform: uppercase;padding:10px;}
+    .groupicon img{
+        height:40px;
+        width:40px;
+        margin-right:10px;
+    }
+    .faq_group{
+        font-size:20px;font-weight:bold;color:#198dd3;text-transform: uppercase;
+    }
+    
+    .sub_container{
+        border:1px solid #c5c5c5;margin:0 0 30px 0;border-radius: 0px 0px 2px 2px;
+    }
+    .faq_title{
+        font-weight:bold;padding:5px;border-radius:2px;background-color:#f6f6f6;font-family: 'Mulish', sans-serif;font-size:16px;
+    }
+    .group:hover,.faq_title:hover{background:#198dd3;color:white;cursor:pointer; transition: background 1s;}
+    .arrow_icon{float:right;margin-right:5px;font-weight:bolder;font-size:20px;}
+    .down_arrow_icon{
+        filter: progid: DXImageTransform.Microsoft.BasicImage(rotation=0.5);
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        transform: rotate(90deg);
+        display: inline-block;
+    }
+    .content{padding:5px;text-decoration:justify;display:none;transition: 1s ease;}
+    
+</style>
+
+<div class="container faq">
+    <div class="page_title">
+        <h1>FAQ</h1>
+    </div>
+
+    <div class="groups">
+        <?php
+            foreach ($groups as $group) {
+                ?>
+                <a href="#group.<?=$group->getFaqgroupId()?>">
+                    <div class="group">
+                        <div class="groupicon"><img src="<?=$block->getIconUrl($group->getIcon())?>" alt=""></div>
+                       
+                        <div class="groupname"><?=$group->getGroupname();?></div>                        
+                    </div>
+                </a>         
+                <?php
+            }
+        ?>
+    </div>
+    <div class="faqs">
+        <?php
+            foreach ($groups as $group) {
+                $groupID = $group->getFaqgroupId();
+                ?>
+                <div class="faq" style="padding:10px;">
+                    <div class="faq_group" id="group.<?=$group->getFaqgroupId()?>"><?=$group->getGroupname();?></div>
+                    
+                    <hr style="margin-top:3px;">
+                    <?php
+                    foreach ($block->getFaq($groupID) as $faq) {
+                        
+                        ?>
+                        <div class="sub_container">
+                            <div class="faq_title" onclick="expandFun(<?='arrow_'.$faq->getId()?>,<?='content_'.$faq->getId()?>)"><?=$faq->getTitle();?><span id="<?="arrow_".$faq->getId();?>" class="arrow_icon "> &gt</span></div>
+                            <div id="<?="content_".$faq->getId();?>" class="content"><?=$faq->getContent();?></div>
+                        </div>
+                        <?php
+                    }
+                    ?>
+            
+                </div>
+                <?php
+            }
+        ?>
+    </div>
+</div>
+
+<script>
+    function expandFun(arrow,content){
+        if(content.style.display == "block"){
+            content.style.transition = "all 2s ease-in-out";
+            content.style.display = "none";
+            arrow.classList.remove("down_arrow_icon");
+            
+        }else{
+            content.style.transition = "all 2s ease-in-out";
+            content.style.display = "block";
+            arrow.classList.add("down_arrow_icon");
+        }
+        
+    }
+
+</script>
